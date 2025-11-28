@@ -1,0 +1,83 @@
+<pre>
+<![CDATA[
+13. Forms & File upload
+=======================
+
+Form-Example[Reactive-Forms]:
+----------------------------
+app.module.ts:
+--------------
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+imports: [ ReactiveFormsModule ]
+
+parent.html:
+------------
+<form (ngSubmit)="submitForm()" [formGroup]="signupForm">
+	<input type="text"  formControlName="ruleName">
+		<div *ngIf="submitted && f.ruleName.errors">
+			<div *ngIf="f.ruleName.errors.required">First Name is required</div>
+			<div *ngIf="f.ruleName.errors.pattern">Name should not contain any characters except alphabets</div>
+		</div>
+	<input type="number"  formControlName="value">
+		<div *ngIf="submitted && f.value.errors">
+			<div *ngIf="f.value.errors.required">value is required</div>
+		</div>
+	<input type="file" name="avatar" (change)="onFileChange($event)" />
+		
+	<button type="submit">SUBMIT</button>
+</form>
+
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+constructor(private formBuilder: FormBuilder, public services:CommonServices) { }
+signupForm:FormGroup;
+get f() { return this.signupForm.controls; }
+
+parent.ts:
+----------
+ngOnInit() {
+    this.signupForm = this.formBuilder.group({
+      'ruleName':['',[Validators.required, Validators.pattern("^[a-zA-Z0-9_]+$")]],
+      'value':[10, [Validators.required]]
+    });
+}
+
+submitForm(){
+    this.submitted = true;
+    //console.log(this.signupForm.controls);
+    if (this.signupForm.invalid) { return }
+	else{//Porcess Form}
+}
+
+onFileChange(event) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.form.get('avatar').setValue(file);
+    }
+}
+]]>
+</pre>
+
+<hr>
+<b>Example</b>
+<form (ngSubmit)="submitForm()" [formGroup]="signupForm">
+	<input type="text"  formControlName="ruleName">
+		<div *ngIf="submitted && f['ruleName'].errors">
+			<div *ngIf="f['ruleName'].errors['required']">First Name is required</div>
+			<div *ngIf="f['ruleName'].errors['pattern']">Name should not contain any characters except alphabets</div>
+        </div>
+
+    <br>
+	<input type="number"  formControlName="value">
+		<div *ngIf="submitted && f['value'].errors">
+			<div *ngIf="f['value'].errors['required']">value is required</div>
+		</div>
+    <input type="file" name="avatar" (change)="onFileChange($event)" />
+
+    <br>
+	<button type="submit">SUBMIT</button>
+</form>
+
+<br>
+<br>
+<br>
+<br>

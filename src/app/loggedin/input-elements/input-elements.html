@@ -1,0 +1,25 @@
+<pre>
+    <![CDATA[
+8.@Inputs:
+==========
+Parent Code:
+------------
+app.component.html
+<app-side-bar-div *ngFor="let each of sideBarHeading" [element]='each'></app-side-bar-div>
+<app-side-bar-div [element]='each'></app-side-bar-div>
+
+Child Component:
+------------------
+<li><a routerLink='{ {element.sidebarLink}}'>{ {element.sidebarName}}</a></li>
+@Input('element') element:{sidebarName: string, sidebarLink:string};    
+    ]]>
+</pre>
+<hr>
+<b>Example Code</b>
+<h6>Single Element</h6>
+<app-nested-input [element]='singleItem'></app-nested-input>
+
+
+<h6>Nesting Element</h6>
+
+<app-nested-input *ngFor="let each of userList" [element]='each'></app-nested-input>

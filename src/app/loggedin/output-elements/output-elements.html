@@ -1,0 +1,24 @@
+<pre>
+<![CDATA[
+9.@Output:(Emitting Events)
+===========================
+ChildComponent Code:
+import {EventEmitter, Output} from '@angular/core';
+
+<div style="color: grey;">{ {element} } <button (click)="generateEvent()">CLICK</button></div>
+@Input('element') element:string;
+@Output() generatedEvent = new EventEmitter<{name:string,type:string}>();
+generateEvent(){
+    this.generatedEvent.emit({name: 'good Name', type: 'good Name'});
+}
+
+parentCompoent Code:
+<app-selector [element]='Jagadish' (generatedEvent)="eventGenerated($event)"></app-selector>
+eventGenerated(event){
+    console.log(event);
+}
+]]>
+</pre>
+<hr>
+<b>Example</b><br>
+<app-nested-output [element]='eachElement' (generatedEvent)="eventGenerated($event)"></app-nested-output>

@@ -1,0 +1,28 @@
+<pre>
+<![CDATA[
+6. Bindings in HTML
+===================
+import { FormsModule} from '@angular/forms';
+1. One way binding:
+-------------------
+{ {oneWayBinded} }
+2. Two way binding:
+-------------------
+<input type="text" [(ngModel)]="name">
+<p>{ {name} }</p>
+3. Id binding:
+--------------
+<input type="text" value="hello" [(ngModel)]="newServerName" #testMe>
+{ {testMe.value} }
+        
+]]>
+
+</pre>
+1. One way binding Example <br>{{oneWayBinded}} <br>
+
+2. Two way binding Example <br>
+<input type="text" [(ngModel)]="twoWayBinded"> <span>{{twoWayBinded}}</span> <br>
+
+3. Id binding Example <br>
+<input type="text" value="hello" [(ngModel)]="idWayBinded" #testMe>
+{{testMe.value}}

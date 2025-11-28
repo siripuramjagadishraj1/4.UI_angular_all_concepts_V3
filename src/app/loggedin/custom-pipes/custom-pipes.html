@@ -1,0 +1,27 @@
+<pre>
+<![CDATA[
+10. @Pipe [Custom Pipes]
+========================
+
+Create a Class:
+---------------
+@Pipe({name:'myCustomPipe'})
+export class myCustomPipe implements PipeTransform{
+
+    transform(value: any, ...args: any[]): any{
+        console.log(value);
+        console.log(args);
+        return "Hanuman";
+    }
+}
+Note: add it in app.module.ts as :import { myCustomPipe } from './myCustomPipe';
+
+Usage in any HTML:  { {'Joga Rao' | myCustomPipe }}
+
+]]>
+</pre>
+<hr>
+<b>Example</b>
+<div>
+        {{'Joga Rao' | myCustomPipe }}
+</div>

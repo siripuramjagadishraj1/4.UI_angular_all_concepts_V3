@@ -1,0 +1,23 @@
+<pre>
+<![CDATA[
+7. Local references & Tricks
+============================
+<input type="text" class="form-control" [(ngModel)]="newServerName" #heading>
+@ViewChild('heading', {static: false}) heading:ElementRef;
+console.log(this.heading.nativeElement.value);
+
+6. Tricks:
+==========
+{ { 'Server' }}
+{ { serverId }}
+{ { getServerStatus() }}
+]]>
+</pre>
+
+
+<hr>
+<b>Working Examples</b>
+<br>
+{{ 'Server' }}<br>
+{{ serverId }}<br>
+{{ getServerStatus() }}

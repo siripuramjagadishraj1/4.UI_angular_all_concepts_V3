@@ -1,0 +1,92 @@
+<pre>
+<![CDATA[
+5. Routing & AuthGuards
+=======================
+
+<ul>
+    <li><a routerLink='DemoBarDivComponent'>DemoBarDivComponent</a></li>
+    <li><a routerLink='SideBarDivComponent'>SideBarDivComponent</a></li>
+</ul>
+<router-outlet></router-outlet>
+]]>
+</pre>
+<pre>
+        <![CDATA[
+app-routing.module.ts
+---------------------
+const routes: Routes = [
+    {
+    path:'',
+    component: LoginComponent
+    },
+    {
+    path:'loggedin',
+    component: LoggedComponent,
+    children:[
+        {
+        path:'',
+        component:DashboardComponent,
+        canActivate: [AuthGuard]
+        },
+        {
+        path:'opc_connector',
+        component:OPCConnectorComponent,
+        canActivate: [AuthGuard]
+        }
+    ]
+    },
+    {
+    path:'**',
+    redirectTo: ''
+    }
+];
+
+
+AuthGurards:
+------------
+>mkdir guards
+>cd guards
+>notepad++ auth.guards.ts
+>Comment out un required code
+import { CanActivate, RouterStateSnapshot, ActivatedRouteSnapshot, Router } from "@angular/router";
+import { Injectable } from "@angular/core";
+import { JwtHelperService } from '@auth0/angular-jwt';
+
+const helper = new JwtHelperService();
+
+@Injectable()
+export class AuthGuard implements CanActivate{
+
+    constructor(private router: Router){}
+
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot){
+        let hasTokenExpired = helper.isTokenExpired(localStorage.getItem('auth_token'))
+        console.log(hasTokenExpired);
+        if(localStorage.getItem('currentUser') && !hasTokenExpired){
+            return true;
+        }else{
+            this.router.navigate(['/login'],{queryParams:{ }})
+            return false;
+        }
+    }
+
+}
+]]>
+</pre>
+
+<pre>
+Example showing child routing and AuthGuads:
+============================================
+</pre>
+
+<div>
+    <div style="width: 20%; background-color: #EEEEEE; float: left;">
+    <ul>
+        <li><a routerLink="childRouteDemo1"><div class="eachHeading">1.Child Route Demo</div></a></li>
+        <li><a routerLink="childRouteDemo2"><div class="eachHeading">2.AuthGuads Child Route Demo</div></a></li>
+    </ul>
+    </div>
+    <div style="width: 80%; float: right; background-color: ivory;">
+        <router-outlet></router-outlet>
+    </div>
+</div>

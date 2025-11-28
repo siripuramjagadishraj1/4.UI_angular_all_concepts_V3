@@ -1,0 +1,47 @@
+<pre>
+<![CDATA[
+11. Observables:
+================
+Note: :HTTP Calls are Observables.
+
+Method-1:
+---------
+import { Observable, Subscription } from 'rxjs';
+
+mainSubscriber:Subscription;
+
+mainObject:any;
+mainObjectRef = new Observable( (e)=>{
+this.mainObject = e;
+});
+
+ngOnInit() {
+this.mainSubscriber = this.mainObjectRef.subscribe(
+		(data)=>{ console.log('Data'+data); }
+	)
+}
+this.mainSubscriber.unsubscribe();
+
+
+Method-2:
+---------
+let userActivated = new Subject();
+
+userActivate.subscribe(
+      (data)=>{
+        console.log('Data'+data);
+      }
+);
+
+userActivate.next(100*Math.random());
+userActivate.unsubscribe();
+
+]]>
+</pre>
+<hr>
+<b>Example (Method-2)</b><br>
+
+<button (click)="showtestSubject()">Click To Publish Event</button>
+{{testSubject}}
+
+<!-- Message: {{ testSubject$ | async }} -->

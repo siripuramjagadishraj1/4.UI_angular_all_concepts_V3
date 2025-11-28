@@ -1,0 +1,48 @@
+<pre>
+<![CDATA[
+14. Directives
+===============
+1. Components directives with a template. [Components]
+2. Structural directives change the DOM layout by adding and removing DOM elements. [ngIf, ngFor, ngSwitch, ngStyle, ngClass]
+3. Attribute directives change the appearance or behavior of an element, component, or another directive.
+
+*ngIf
+*ngFor="let each of List"
+[ngStyle]="{background-color: getColor()}"
+[ngClass]="{online: serverStatus === 'online'}"
+  If server status is online thne only online css is loaded.
+<app-server *ngFor="let  server of servers; let i = index"></app-server>
+
+Custom Directives:
+==================
+Create a ts file
+----------------
+@Directive({
+  selector: '[appHighlight]'
+})
+export class HighlightDirective {
+  constructor(el: ElementRef) {
+    el.nativeElement.style.backgroundColor = 'yellow';
+  }
+}
+
+in app.module.ts:
+-----------------
+declarations: [HighlightDirective]
+]]>
+</pre>
+<hr>
+<b>Examples</b><br>
+<u>*ngIf</u>
+<div *ngIf="ngIfTest">
+ Testing NgIf..
+</div>
+<br>
+
+<u>*ngFor</u>
+<div *ngFor="let each of ngForTest">
+  {{each}}
+ </div>
+
+ <u>Custom Directive</u>
+ <div appHighlightDirective>Highlighting in Yellow..Now Hoover over me..</div>

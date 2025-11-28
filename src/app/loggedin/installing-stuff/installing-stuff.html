@@ -1,0 +1,201 @@
+<div *ngIf="showDisplay">
+<pre>
+<![CDATA[
+1. Installing Stuff
+===================
+]]>
+</pre>
+<h4>Topics Completed</h4>
+<table class="" border="1">
+        <tr style="background-color: grey;"> 
+            <td>Sl NO:</td>
+            <td>Category</td>
+            <td>Topic</td>
+            <td>Time Taken</td> 
+            <td>FromTo</td> 
+            <td>Status</td> 
+            <td>Content</td>
+            <td>Comment</td>
+        </tr>
+        <tr *ngFor="let  eachTopic of uiTopicsCompleted; let i = index" [ngStyle]="{'background-color': getColor(i)}" > 
+            <td>{{i+1}}</td>
+            <td>{{eachTopic.category}}</td>
+            <td>{{eachTopic.topic}}</td>
+            <td>{{eachTopic.duration}}</td>
+            <td>{{eachTopic.fromTo}}</td>
+            <td [ngClass]="{pendingClass: eachTopic.status == 'PENDING', notPendingClass: eachTopic.status != 'PENDING'}">{{eachTopic.status}}</td>
+            <td><div *ngFor="let each of eachTopic.content;"><a href="{{each.link}}">{{each.topic}}</a></div></td>
+            <td>{{eachTopic.comment}}</td>
+        </tr>
+</table>
+<br>
+<table class="" border="1">
+        <tr style="background-color: grey;"> 
+            <td>Sl NO:</td>
+            <td>Category</td>
+            <td>Topic</td>
+            <td>Time Taken</td> 
+            <td>FromTo</td> 
+            <td>Status</td> 
+            <td>Content</td>
+            <td>Comment</td>
+        </tr>
+        <tr *ngFor="let  eachTopic of backEndTopicsCompleted; let i = index" [ngStyle]="{'background-color': getColor(i)}" > 
+            <td>{{i+1}}</td>
+            <td>{{eachTopic.category}}</td>
+            <td>{{eachTopic.topic}}</td>
+            <td>{{eachTopic.duration}}</td>
+            <td>{{eachTopic.fromTo}}</td>
+            <td [ngClass]="{pendingClass: eachTopic.status == 'PENDING', notPendingClass: eachTopic.status != 'PENDING'}">{{eachTopic.status}}</td>
+            <td><div *ngFor="let each of eachTopic.content;"><a href="{{each}}">{{each}}</a></div></td>
+            <td>{{eachTopic.comment}}</td>
+        </tr>
+</table>
+<br>
+<table class="" border="1">
+    <tr style="background-color: grey;"> 
+        <td>Sl NO:</td>
+        <td>Category</td>
+        <td>Topic</td>
+        <td>Time Taken</td> 
+        <td>FromTo</td> 
+        <td>Status</td> 
+        <td>Content</td>
+        <td>Comment</td>
+    </tr>
+    <tr *ngFor="let  eachTopic of otherTopicsCompleted; let i = index" [ngStyle]="{'background-color': getColor(i)}" > 
+        <td>{{i+1}}</td>
+        <td>{{eachTopic.category}}</td>
+        <td>{{eachTopic.topic}}</td>
+        <td>{{eachTopic.duration}}</td>
+        <td>{{eachTopic.fromTo}}</td>
+        <td [ngClass]="{pendingClass: eachTopic.status == 'PENDING', notPendingClass: eachTopic.status != 'PENDING'}">{{eachTopic.status}}</td>
+        <td><div *ngFor="let each of eachTopic.content;"><a href="{{each.link}}">{{each.topic}}</a></div></td>
+        <td>{{eachTopic.comment}}</td>
+    </tr>
+</table>
+
+</div>
+
+<pre>
+Installing NodeJS: (https://nodejs.org/dist/v10.16.3/node-v10.16.3-win-x64.zip)
+==================
+Download node.js portabale binaries
+unzip it.
+set path variable as per os..
+>node -v  //Node js
+v10.16.3
+>npm -v   //Package Manager
+6.9.0
+
+Installing IDE's(VS-Code https://code.visualstudio.com/download#):
+================
+unzip it and add to path variable. and run it to open project.
+
+Installing Anguar using NPM:
+============================
+Install NG Client: https://cli.angular.io/
+Angular Intro: https://angular.io/docs
+>npm install -g @angular/cli
+>ng --version
+>ng new my-dream-app  //Add routing, Style sheet option.
+>cd my-dream-app
+>ng serve			  //localhost:4200
+
+Few other commands to try:
+==========================
+>ng help
+>ng generate --help
+
+>ng build my-dream-app -c production
+>npm i rxjs-compat --save
+>ng g c cockpit --spec false
+
+Angular 8 to 18+ migration and FAQ's
+=====================================
+Q. angular 17 app not routing on click of routeOutLet
+Ans: import -- > RouterLink in app.ts
+Q. Can't bind to 'ngClass' since it isn't a known property of 'td'
+Ans: import -- > CommonModule
+Q.  Property 'element' has no initializer and is not definitely assigned in the constructor
+Ans: 
+@Input('element') element: {{'{'}} userId:number; userName:string; userType:string &#125;; 
+@Input('element') element:any;
+Q. object possibly null in angular & lot more minor syntax errors.
+Ans: tsconfig.json make sure-- > "compilerOptions":  "strict": false 
+Q. Can't bind to 'formGroup' since it isn't a known property of 'form'
+
+Ans: ReactiveFormsModule import this.
+Q. What is standalone true/false in angular.
+Q. Whats new in RX/JS library.
+Note
+* imports: [] is added to Compoent, but we dont have app.module.ts file to declare all components globally.
+give imports[] if standaloe = true, else dont give imports.
+
+app-module.ts -- > old contains all the declaration of components. Now the parent component just need to declare it.
+app-routing.module.ts -- > 
+ng g c -- > used to create files with component extention.
+
+Angular 18+ structrue:
+======================
+package.json, angular.json
+
+main.ts -- > app.ts[app-root], app.config.ts[providers=provideBrowserGlobalErrorListeners,provideRouter,provideHttpClient]
+index.html,style.css,
+	app.ts[RouterOutlet, RouterLink, Modules], 
+	app.html -- > containse routes and side Menu Bar.
+	app.config.ts(appConfig) --- >app.routes.ts
+	NewLazyModule.ts(CustomersModule)
+	global.services.ts, 
+	app.config.ts, app.
+
+Angular components
+==================
+ng new 4.UI_angular_all_concepts_V3
+cd 4.UI_angular_all_concepts_V3
+cd src/app
+mkdir loggedin
+cd loggedin
+ng g c angular-project-structure    --skip-tests
+ng g c bindings                     --skip-tests
+ng g c build-misc-installs          --skip-tests
+ng g c component-life-cycle         --skip-tests
+ng g c custom-pipes                 --skip-tests
+ng g c dashboard                    --skip-tests
+ng g c decorator-custom             --skip-tests
+ng g c directives-custom            --skip-tests
+ng g c features                     --skip-tests
+ng g c form-demo                    --skip-tests
+ng g c http-calls-demo              --skip-tests
+ng g c input-elements               --skip-tests
+	cd  input-elements
+	ng g c nested-input --skip-tests
+
+ng g c installing-stuff             --skip-tests
+ng g c integration-of-frameworks    --skip-tests
+ng g c lazy-loading                 --skip-tests
+ng g c learn-type-script            --skip-tests
+ng g c local-references-and-tricks  --skip-tests
+ng g c observables-demo             --skip-tests
+ng g c output-elements              --skip-tests
+	cd output-elements
+	ng g c nested-input --skip-tests
+
+ng g c routing-cheat                --skip-tests
+	cd routing-cheat
+	ng g c sub-route1 --skip-tests
+	ng g c sub-route2 --skip-tests
+
+ng g c user-list                    --skip-tests
+
+npm install --save bootstrap@3
+npm install jquery --save
+
+CustomPipe, Service,
+ng generate service global-services --skip-tests
+ng generate pipe myCustomPipe --skip-tests
+ng generate module NewLazyModule --skip-tests
+ng generate directive HighlightDirective --skip-tests
+ng generate guard auth --skip-tests
+</pre>
+        
