@@ -1,5 +1,6 @@
 ##  Angular 8 to 18+ migration and FAQ's
-========================================
+======================================== 
+
 	Q. angular 17 app not routing on click of routeOutLet
 	Ans: import -- > RouterLink in app.ts
 	Q. Can't bind to 'ngClass' since it isn't a known property of 'td'
